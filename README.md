@@ -1,3 +1,21 @@
+# My note
+- using node-sass
+## Folder structure
+```
+src
+|__ components (shared components between features)
+|   |__ componentName
+|       |__ index.jsx
+|       |__ styles.scss
+|__ features
+|   |__ FeatureName
+|       |__ components (components of featureName)
+|       |__ pages (pages of featureName)
+|       |__ index.jsx (entry point of featureName)
+|
+}__ App.js
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
