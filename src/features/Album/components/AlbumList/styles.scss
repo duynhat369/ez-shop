@@ -10,3 +10,19 @@
     padding: 0 20px;
   }
 }
+
+.bookmark-item {
+  .album__thumbnail {
+    & > img {
+      opacity: 0.3;
+    }
+  }
+
+  .album__title {
+    text-decoration: line-through;
+  }
+}
+
+.new-item {
+  color: rgb(255, 123, 0);
+}
