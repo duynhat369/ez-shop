@@ -1,5 +1,5 @@
 # My note
-- using node-sass
+- using node-sass, classnames
 ## Folder structure
 ```
 src
