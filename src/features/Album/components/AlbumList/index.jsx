@@ -5,10 +5,22 @@ import "./styles.scss"
 import classnames from 'classnames';
 
 AlbumList.propTypes = {
-  albumList: PropTypes.array.isRequired
+  albumList: PropTypes.array,
+  onAlbumClick: PropTypes.func
 };
 
-function AlbumList({ albumList }) {
+AlbumList.defaultProps = {
+  albumList: [],
+  onAlbumClick: null
+}
+
+function AlbumList({ albumList, onAlbumClick }) {
+  const handleAlbumClick = (album, idx) => {
+    if (!onAlbumClick) return;
+
+    onAlbumClick(album, idx);
+  }
+
   return (
     <ul className="album-list">
       {albumList.map((album, idx) => (
@@ -18,7 +30,7 @@ function AlbumList({ albumList }) {
             'item-album': true,
             'bookmark-item': album.status === 'bookmark'
           })}
-          onClick="{ }"
+          onClick={() => handleAlbumClick(album, idx)}
         >
           <Album album={album} />
         </li>

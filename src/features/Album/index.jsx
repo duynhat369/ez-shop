@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import AlbumList from './components/AlbumList';
+import "./styles.scss"
 
 AlbumFeature.propTypes = {
 
@@ -58,14 +59,47 @@ function AlbumFeature(props) {
   ]
 
   const [albumList, setAlbumList] = useState(initAlbumList);
+  const [filteredStatus, setFilteredStatus] = useState('all');
 
-  const handleAlbumClick = () => { }
+  const handleAlbumClick = (album, idx) => {
+    //clone current array to the new one
+    const newAlbumList = [...albumList];
+
+    //toggle state
+    newAlbumList[idx] = {
+      ...newAlbumList[idx],
+      status: newAlbumList[idx].status === 'new' ? 'bookmark' : 'new'
+    };
+
+    //update status
+    setAlbumList(newAlbumList)
+  }
+
+  const handleShowAllClick = () => {
+    setFilteredStatus('all')
+  }
+
+  const handleShowNewClick = () => {
+    setFilteredStatus('new')
+  }
+
+  const handleShowBookmarkClick = () => {
+    setFilteredStatus('bookmark')
+  }
+
+  const renderedAlbumList = albumList.filter(album => filteredStatus === 'all' || filteredStatus === album.status);
 
   return (
     <div>
       <h2>Music album June </h2>
+      <div className="button-group">
+        <button onClick={handleShowAllClick}>Show all</button>
+        <button onClick={handleShowNewClick}>Show new</button>
+        <button onClick={handleShowBookmarkClick}>Show bookmarked</button>
+      </div>
+
       <div>
-        <AlbumList albumList={albumList} onAlbumClick={handleAlbumClick} />  {/** Push albumList array to AlbumList function*/}
+        <AlbumList albumList={renderedAlbumList} onAlbumClick={handleAlbumClick} />  {/** Push albumList array to AlbumList function*/}
       </div>
     </div>
   );
