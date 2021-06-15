@@ -13,7 +13,7 @@ src
 |       |__ pages (pages of featureName)
 |       |__ index.jsx (entry point of featureName)
 |
-}__ App.js
+|__ App.js
 ```
 
 # Getting Started with Create React App
