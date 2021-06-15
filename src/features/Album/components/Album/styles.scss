@@ -1,0 +1,13 @@
+.album__title {
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
+.album__thumb {
+  img {
+    width: 100%;
+
+    transition: 0.3s ease all;
+  }
+}

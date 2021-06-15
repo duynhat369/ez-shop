@@ -1,9 +1,11 @@
 import "./App.scss";
+import FeatureAlbum from "./features/Album/index.jsx";
 
 function App() {
   return (
     <div className="App">
-      <h1>React Music Album From Mp3</h1>
+      <h1>React Music Album</h1>
+      <FeatureAlbum />
     </div>
   );
 }

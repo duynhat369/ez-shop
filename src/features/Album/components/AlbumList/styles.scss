@@ -1,0 +1,23 @@
+.album-list {
+  list-style-type: none;
+  margin-left: -40px;
+  display: flex;
+  flex-flow: row wrap;
+
+  & > li {
+    width: 25%;
+    margin: 1rem;
+    margin-bottom: 2rem;
+
+    background-color: #eee;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    cursor: pointer;
+
+    overflow: hidden;
+
+    &:hover img {
+      transform: scale(1.1);
+    }
+  }
+}
