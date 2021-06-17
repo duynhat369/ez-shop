@@ -8,12 +8,12 @@ Album.propTypes = {
 
 function Album({ album }) {
   return (
-    <frameElement>
+    <React.Fragment>
       <div className="album__thumb">
         <img src={album.image} alt={album.title} />
       </div>
       <p className="album__title">{album.title}</p>
-    </frameElement>
+    </React.Fragment>
   );
 }
 
