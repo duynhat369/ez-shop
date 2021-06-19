@@ -1,11 +1,10 @@
 import "./App.scss";
-import FeatureAlbum from "./features/Album/index.jsx";
+import TodoFeature from "./features/Todo";
 
 function App() {
   return (
-    <div className="App">
-      <h1>React Music Album</h1>
-      <FeatureAlbum />
+    <div className="todo-app">
+      <TodoFeature />
     </div>
   );
 }

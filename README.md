@@ -1,6 +1,9 @@
 # My note
+
 - using node-sass, classnames
+
 ## Folder structure
+
 ```
 src
 |__ components (shared components between features)
@@ -8,10 +11,10 @@ src
 |       |__ index.jsx
 |       |__ styles.scss
 |__ features
-|   |__ FeatureName
-|       |__ components (components of featureName)
-|       |__ pages (pages of featureName)
-|       |__ index.jsx (entry point of featureName)
+|   |__ Todo
+|       |__ components (components of Todo)
+|       |__ pages (pages of Todo)
+|       |__ index.jsx (entry point of Todo)
 |
 |__ App.js
 ```
