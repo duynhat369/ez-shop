@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
-import { AiOutlineClose, AiOutlineEdit } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlineEdit, AiOutlineRollback } from 'react-icons/ai';
 import { MdDone } from 'react-icons/md';
 import TodoForm from "../TodoForm";
 import "./styles.scss";
@@ -27,12 +27,33 @@ function TodoList({ onDoneCLick }) {
     //toggle state
     newTodos[index] = {
       ...newTodos[index],
-      status: newTodos[index].status === "new" ? "done" : "new",
+      status: "done",
     }
 
     //update todo list
     setTodos(newTodos)
-    console.log(newTodos)
+  }
+
+  const handleRollbackClick = (todo, index) => {
+    const newTodos = [...todos]
+
+    newTodos[index] = {
+      ...newTodos[index],
+      status: "new",
+    }
+
+    setTodos(newTodos)
+  }
+
+  const handleUpdateClick = (todo, index) => { }
+
+  const handleDeleteClick = (todo, index) => {
+    //splice index
+    const newTodos = [...todos]
+
+    newTodos.splice(index, 1)
+
+    setTodos(newTodos)
   }
 
   return (
@@ -51,11 +72,11 @@ function TodoList({ onDoneCLick }) {
             <p className="content">
               {todo.text}
             </p>
-
             <div className="icons">
-              <AiOutlineEdit className="icon" />
-              <AiOutlineClose className="icon" />
+              <AiOutlineEdit className="icon" onClick={() => handleUpdateClick(todo, index)} />
+              <AiOutlineClose className="icon" onClick={() => handleDeleteClick(todo, index)} />
               <MdDone className="icon" onClick={() => handleDoneClick(todo, index)} />
+              <AiOutlineRollback className="icon" onClick={() => handleRollbackClick(todo, index)} />
             </div>
           </li>
         ))}
