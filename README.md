@@ -1,6 +1,9 @@
 # My note
 
-- using node-sass, classnames
+- using:
+  + node-sass
+  + classnames
+  + react-icons
 
 ## Folder structure
 
