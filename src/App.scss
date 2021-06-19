@@ -1,6 +1,13 @@
 .todo-app {
-  width: 500px;
+  width: 800px;
+
   position: absolute;
   left: 50%;
+  top: 0;
   transform: translate(-50%, 0);
+
+  box-shadow: 0 0 20px #bbb;
+
+  margin: 3rem auto;
+  padding: 2rem 3rem;
 }

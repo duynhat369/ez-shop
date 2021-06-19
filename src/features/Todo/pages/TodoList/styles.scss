@@ -5,15 +5,58 @@
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
+
   .todo-list__title {
     font-size: 3rem;
+    margin: 1rem 0;
   }
 
   .todo-list__item {
     width: 100%;
 
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: column wrap;
     align-items: flex-start;
+
+    list-style-type: none;
+
+    & > .item {
+      width: 100%;
+
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      align-items: center;
+
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+      padding: 1rem;
+      margin: 0.5rem 0;
+
+      font-weight: bold;
+
+      & > .content {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 80%;
+      }
+
+      & > .icons {
+        margin: 0 -0.5rem;
+        .icon {
+          font-size: 1.2rem;
+
+          margin: 0 0.5rem;
+          cursor: pointer;
+        }
+        .icon:hover {
+          color: coral;
+        }
+      }
+    }
+
+    & > .done {
+      opacity: 0.2;
+    }
   }
 }

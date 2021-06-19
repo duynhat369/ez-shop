@@ -26,7 +26,8 @@ function TodoForm(props) {
 
     const formValues = {
       id: Math.floor(Math.random() * 10000),
-      text: input
+      text: input,
+      status: "new",
     }
 
     //reset input form value
