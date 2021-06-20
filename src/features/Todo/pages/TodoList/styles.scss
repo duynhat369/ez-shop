@@ -36,9 +36,10 @@
       font-weight: bold;
 
       & > .content {
+        width: 80%;
+
         overflow: hidden;
         text-overflow: ellipsis;
-        width: 80%;
       }
 
       & > .icons {
@@ -77,5 +78,20 @@
         }
       }
     }
+  }
+
+  .todo-form-update {
+    display: none;
+  }
+}
+
+.updating {
+  .todo-form,
+  .todo-list__item {
+    display: none;
+  }
+
+  .todo-form-update {
+    display: flex;
   }
 }

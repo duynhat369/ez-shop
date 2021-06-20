@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import "./styles.scss"
+import "./styles.scss";
 
 TodoForm.propTypes = {
   onSubmit: PropTypes.func,
@@ -32,23 +32,24 @@ function TodoForm(props) {
 
     //reset input form value
     setInput("")
-
     //submit
     onSubmit(formValues)
   }
 
   return (
-    <form className="todo-form" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="todo-input"
-        className="todo-input"
-        value={input}
-        onChange={handleInputChange}
-        placeholder="Add a new plan to list"
-      />
-      <button className="todo-button">ADD</button>
-    </form>
+    <React.Fragment>
+      <form className="todo-form" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="todo-input"
+          className="todo-input"
+          value={input}
+          onChange={handleInputChange}
+          placeholder="Add a new plan to list"
+        />
+        <button className="todo-button">ADD</button>
+      </form>
+    </React.Fragment>
   );
 }
 
