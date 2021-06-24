@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineRollback } from 'react-icons/ai';
 import { MdDone } from 'react-icons/md';
+import TodoCounter from '../TodoCounter';
 import TodoForm from "../TodoForm";
 import TodoFormUpdate from '../TodoFormUpdate';
 import "./styles.scss";
@@ -11,14 +12,12 @@ TodoList.propTypes = {
 
 function TodoList() {
   const [todos, setTodos] = useState([])
+  const [count, setCount] = useState(0)
 
   //add todo
   const handleTodoFormSubmit = (formValues) => {
-    if (!formValues.text || /^\s*$/.test(formValues.text)) {
-      return
-    }
-
     const newTodos = [formValues, ...todos]
+    setCount(x => x + 1)
     setTodos(newTodos)
   }
 
@@ -52,6 +51,7 @@ function TodoList() {
 
     newTodos.splice(index, 1)
 
+    setCount(x => x - 1)
     setTodos(newTodos)
   }
 
@@ -66,8 +66,13 @@ function TodoList() {
 
   return (
     <div className="todo-list">
-      <h2 className="todo-list__title">Plans for today</h2>
-      <TodoForm onSubmit={handleTodoFormSubmit} />
+      <div className="todo-list-heading">
+        <h2 className="todo-list__title">Plans for today</h2>
+        <span className="todo-list__counter">
+          <TodoCounter count={count} />
+        </span>
+      </div>
+      <TodoForm onSubmit={handleTodoFormSubmit} count={count} />
       <TodoFormUpdate onSubmitUpdate={handleTodoFormUpdateSubmit} />
       <ul className="todo-list__item">
         {todos.map((todo, index) => (

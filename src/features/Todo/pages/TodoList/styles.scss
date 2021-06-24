@@ -1,3 +1,4 @@
+$color-primary: coral;
 .todo-list {
   width: 100%;
 
@@ -6,82 +7,94 @@
   justify-content: center;
   align-items: center;
 
+  .todo-form-update {
+    display: none;
+  }
+}
+
+.todo-list-heading {
   .todo-list__title {
+    display: inline-block;
     font-size: 3rem;
     margin: 1rem 0;
   }
 
-  .todo-list__item {
+  .todo-list__counter {
+    display: inline-block;
+
+    font-size: 3rem;
+    margin: 1rem 0.5rem;
+    font-weight: bold;
+
+    color: $color-primary;
+  }
+}
+.todo-list__item {
+  width: 100%;
+
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
+
+  list-style-type: none;
+
+  & > .item {
     width: 100%;
 
     display: flex;
-    flex-flow: column wrap;
-    align-items: flex-start;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
 
-    list-style-type: none;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin: 0.5rem 0;
 
-    & > .item {
-      width: 100%;
+    font-weight: bold;
 
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-between;
-      align-items: center;
+    & > .content {
+      width: 80%;
 
-      border: 1px solid #ccc;
-      border-radius: 0.25rem;
-      padding: 1rem;
-      margin: 0.5rem 0;
-
-      font-weight: bold;
-
-      & > .content {
-        width: 80%;
-
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      & > .icons {
-        margin: 0 -0.5rem;
-        .icon {
-          font-size: 1.2rem;
-
-          margin: 0 0.5rem;
-          cursor: pointer;
-        }
-        .icon:nth-child(4) {
-          display: none;
-        }
-
-        .icon:hover {
-          color: coral;
-        }
-      }
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    & > .done {
-      & > .content {
-        opacity: 0.2;
-      }
-      & > .icons {
-        .icon {
-          cursor: default;
-        }
+    & > .icons {
+      margin: 0 -0.5rem;
+      .icon {
+        font-size: 1.2rem;
 
-        .icon:nth-child(4) {
-          display: inline-block;
-          cursor: pointer;
-        }
-        .icon:not(:nth-child(4)) {
-          display: none;
-        }
+        margin: 0 0.5rem;
+        cursor: pointer;
+      }
+      .icon:nth-child(4) {
+        display: none;
+      }
+
+      .icon:hover {
+        color: $color-primary;
       }
     }
   }
 
-  .todo-form-update {
-    display: none;
+  & > .done {
+    & > .content {
+      opacity: 0.2;
+    }
+    & > .icons {
+      .icon {
+        cursor: default;
+      }
+
+      .icon:nth-child(4) {
+        display: inline-block;
+        cursor: pointer;
+      }
+      .icon:not(:nth-child(4)) {
+        display: none;
+      }
+    }
   }
 }
 
