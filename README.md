@@ -1,10 +1,15 @@
 # My note
 
 - using:
-  + node-sass
-  + classnames
-  + react-icons
- 
+
+  - node-sass
+  - classnames
+  - react-icons
+  - query-string
+  - material-ui/core
+  - material-ui/icons
+  - axios
+
 - Link app: https://react-udemy-duynhat369.vercel.app/
 
 ## Folder structure

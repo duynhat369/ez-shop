@@ -1,13 +1,16 @@
-.todo-app {
-  width: 800px;
+.app {
+  margin: 0 auto;
+  & .active-menu {
+    color: rgb(175, 255, 109);
+    text-decoration: none;
+  }
 
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translate(-50%, 0);
+  .header {
+    display: flex;
+    width: 100%;
+    color: #fff;
 
-  box-shadow: 0 0 20px #bbb;
-
-  margin: 3rem auto;
-  padding: 2rem 3rem;
+    font-weight: bold;
+    list-style-type: none;
+  }
 }

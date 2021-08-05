@@ -1,16 +1,23 @@
 import React from 'react';
-import TodoList from "./pages/TodoList";
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import NotFound from '../../components/NotFound';
+import DetailPage from './pages/DetailPage';
+import ListPage from './pages/ListPage';
 
-TodoFeature.propTypes = {
+Pages.propTypes = {};
 
-};
+function Pages(props) {
+    const match = useRouteMatch();
+    return (
+        <>
+            <Switch>
+                <Route path={match.path} component={ListPage} exact />
+                <Route path={`${match.path}/:id`} component={DetailPage} />
 
-function TodoFeature(props) {
-  return (
-    <React.Fragment>
-      <TodoList />
-    </React.Fragment>
-  );
+                <Route component={NotFound} />
+            </Switch>
+        </>
+    );
 }
 
-export default TodoFeature;
+export default Pages;
