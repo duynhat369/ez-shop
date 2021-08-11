@@ -1,14 +1,19 @@
+import { Box, IconButton, MenuItem } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
+import Menu from '@material-ui/core/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import { AccountCircle, Close } from '@material-ui/icons';
 import CropFreeIcon from '@material-ui/icons/CropFree';
+import Login from 'features/Auth/components/Login';
 import Register from 'features/Auth/components/Register';
+import { logout } from 'features/Auth/userSlice';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 
 
@@ -25,12 +30,35 @@ const useStyles = makeStyles((theme) => ({
     link: {
         color: '#fff',
         textDecoration: 'none',
-    }
+    },
+    closeButton: {
+        position: 'absolute',
+        top: theme.spacing(1),
+        right: theme.spacing(1),
+        color: theme.palette.grey[500],
+        zIndex: 1,
+    },
+    box: {
+        textAlign: 'center',
+        marginBottom: theme.spacing(2),
+    },
 }));
 
+const MODE = {
+    REGISTER: 'register',
+    LOGIN: 'login',
+}
+
 export default function Header() {
-    const classes = useStyles();
+    const dispatch = useDispatch();
+    const [anchorEl, setAnchorEl] = useState(null)
+    const loggedInUser = useSelector(state => state.user.current)
+    const isLoggedIn = !!loggedInUser.id
+
     const [open, setOpen] = useState(false);
+    const [mode, setMode] = useState(MODE.LOGIN);
+
+    const classes = useStyles();
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -39,6 +67,19 @@ export default function Header() {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleMenuClick = (e) => {
+        setAnchorEl(e.currentTarget)
+    }
+    const handleCloseMenu = () => {
+        setAnchorEl(null)
+    }
+
+    const handleLogoutClick = () => {
+        const action = logout()
+        dispatch(action);
+        setAnchorEl(null)
+    }
 
     return (
         <div className={classes.root}>
@@ -64,9 +105,36 @@ export default function Header() {
                     >
                         <Button color="inherit">Detail Page</Button>
                     </NavLink>
-
-                    <Button color="inherit" onClick={handleClickOpen}>Register</Button>
+                    {!isLoggedIn && (
+                        <Button color="inherit" onClick={handleClickOpen} >
+                            Login
+                        </Button>
+                    )}
+                    {isLoggedIn && (
+                        <IconButton color="inherit" onClick={handleMenuClick}>
+                            <AccountCircle />
+                        </IconButton>
+                    )}
                 </Toolbar>
+                <Menu
+                    keepMounted
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClose={handleCloseMenu}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                    getContentAnchorEl={null}
+                >
+                    <MenuItem onClick={handleCloseMenu}>Profile</MenuItem>
+                    <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
+                    <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
+                </Menu>
             </AppBar>
 
             <Dialog
@@ -76,14 +144,32 @@ export default function Header() {
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
             >
+                <IconButton className={classes.closeButton} onClick={handleClose} >
+                    <Close />
+                </IconButton>
                 <DialogContent>
-                    <Register closeDialog={handleClose} />
+                    {mode === MODE.REGISTER &&
+                        <>
+                            <Register closeDialog={handleClose} />
+                            <Box className={classes.box}>
+                                <Button color='primary' onClick={() => setMode(MODE.LOGIN)}>
+                                    Already have an account. Login here
+                                </Button>
+                            </Box>
+                        </>
+                    }
+                    {mode === MODE.LOGIN &&
+                        <>
+
+                            <Login closeDialog={handleClose} />
+                            <Box className={classes.box}>
+                                <Button color='primary' onClick={() => setMode(MODE.REGISTER)}>
+                                    Don't have an account. Register here
+                                </Button>
+                            </Box>
+                        </>
+                    }
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary">
-                        Cancel
-                    </Button>
-                </DialogActions>
             </Dialog>
         </div>
     );

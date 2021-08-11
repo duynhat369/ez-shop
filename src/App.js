@@ -1,4 +1,3 @@
-import { Button } from '@material-ui/core';
 import Header from 'components/Header';
 import { useSnackbar } from 'notistack';
 import { useEffect } from 'react';
@@ -12,8 +11,6 @@ import Counter from './features/Counter';
 import Pages from './features/Todo';
 
 function App() {
-  const { enqueueSnackbar } = useSnackbar();
-
   useEffect(() => {
     (async () => {
       try {
@@ -27,17 +24,11 @@ function App() {
     })();
   }, []);
 
-  const showNoti = () => {
-    enqueueSnackbar('This is a notifycations', { variant: 'error' });
-  };
-
   return (
     <div className='app'>
       <div className='header'>
         <Header />
       </div>
-
-      <Button onClick={showNoti}>Show notifications stack</Button>
 
       <Switch>
         <Route path='/' component={Clock} exact />
