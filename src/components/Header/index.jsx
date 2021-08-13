@@ -91,12 +91,12 @@ export default function Header() {
                     </Typography>
 
                     <NavLink
-                        to='/list'
+                        to='/products'
                         className={classes.link}
                         activeClassName='active-menu'
                         exact
                     >
-                        <Button color="inherit">List Page</Button>
+                        <Button color="inherit">Products</Button>
                     </NavLink>
                     <NavLink
                         to='/list/:id'

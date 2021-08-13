@@ -4,9 +4,9 @@ import NotFound from '../../components/NotFound';
 import DetailPage from './pages/DetailPage';
 import ListPage from './pages/ListPage';
 
-Pages.propTypes = {};
+TodoFeature.propTypes = {};
 
-function Pages(props) {
+function TodoFeature(props) {
     const match = useRouteMatch();
     return (
         <>
@@ -20,4 +20,4 @@ function Pages(props) {
     );
 }
 
-export default Pages;
+export default TodoFeature;

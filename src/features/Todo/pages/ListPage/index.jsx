@@ -5,9 +5,9 @@ import TodoForm from '../../components/TodoForm';
 import TodoList from '../../components/TodoList';
 import "./styles.scss";
 
-ListPage.propTypes = {};
+ListTodo.propTypes = {};
 
-function ListPage(props) {
+function ListTodo(props) {
     const initTodoList = [
         {
             id: 1,
@@ -103,4 +103,4 @@ function ListPage(props) {
     );
 }
 
-export default ListPage;
+export default ListTodo;

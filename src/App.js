@@ -1,5 +1,6 @@
 import Header from 'components/Header';
-import { useSnackbar } from 'notistack';
+import ProductFeature from 'features/Product';
+import TodoFeature from 'features/Todo';
 import { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import productApi from './api/productApi';
@@ -8,7 +9,6 @@ import Box from './components/Box';
 import Clock from './components/Clock';
 import NotFound from './components/NotFound';
 import Counter from './features/Counter';
-import Pages from './features/Todo';
 
 function App() {
   useEffect(() => {
@@ -35,7 +35,8 @@ function App() {
         <Route path='/clock' component={Clock} exact />
         <Route path='/counter' component={Counter} exact />
         <Route path='/box' component={Box} exact />
-        <Route path='/list' component={Pages} />
+        <Route path='/list' component={TodoFeature} />
+        <Route path='/products' component={ProductFeature} />
 
         <Route component={NotFound} />
       </Switch>
