@@ -3,12 +3,13 @@ import axiosClient from './axiosClient';
 const productApi = {
   async getAll(params) {
     const url = '/products';
+    // console.log({ params });
     // return axiosClient.get(url, { params });
 
     // + async getAll
     // + transform _page to _start
     const newParams = { ...params };
-    console.log({ params });
+    // console.log({ newParams });
     newParams._start =
       !params._page || params._page <= 1 ? 0 : (params._page - 1) * (params._limit || 50);
 

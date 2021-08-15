@@ -24,7 +24,7 @@ function ProductListSkeletons({ length }) {
                         lg={3}
                     >
                         <Box padding={1}>
-                            < Skeleton variant="rect" width="100%" height={118} />
+                            < Skeleton variant="rect" width="100%" height={220} />
                             < Skeleton />
                             <Skeleton width="60%" />
                         </Box>

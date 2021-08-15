@@ -92,7 +92,8 @@ function LoginForm(props) {
                     type="submit"
                     className={classes.submit}
                     variant="contained"
-                    color="primary" fullWidth
+                    color="primary"
+                    fullWidth
                     size="large"
                 >Sign in</Button>
             </form>

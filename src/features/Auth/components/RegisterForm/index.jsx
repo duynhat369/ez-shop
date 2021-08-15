@@ -107,7 +107,8 @@ function RegisterForm(props) {
                     type="submit"
                     className={classes.submit}
                     variant="contained"
-                    color="primary" fullWidth
+                    color="primary"
+                    fullWidth
                     size="large"
                 >Create an account</Button>
             </form>
