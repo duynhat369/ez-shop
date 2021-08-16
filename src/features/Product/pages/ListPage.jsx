@@ -3,6 +3,7 @@ import productApi from 'api/productApi';
 import React, { useEffect, useState } from 'react';
 import ProductList from '../components/ProductList';
 import ProductListSkeletons from '../components/ProductListSkeletons';
+import { Pagination } from '@material-ui/lab';
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -12,26 +13,50 @@ const useStyles = makeStyles(theme => ({
     right: {
         flex: '1 1 0',
     },
+    pagination: {
+        display: 'flex',
+        flexFlow: 'row nowrap',
+        justifyContent: 'center',
+
+        marginTop: '30px',
+        paddingBottom: '20px',
+    },
 }))
 
 function ListPage(props) {
     const classes = useStyles()
     const [productList, setProductList] = useState([])
     const [loading, setLoading] = useState(true)
+    const [pagination, setPagination] = useState({
+        page: 1,
+        limit: 8,
+        total: 8,
+    })
+    const [filters, setFilters] = useState({
+        _page: 1,
+        _limit: 8,
+    })
 
     useEffect(() => {
         (async () => {
             try {
-                const params = { _page: 1, _limit: 10, }
-                const { data } = await productApi.getAll(params)
+                const { data, pagination } = await productApi.getAll(filters)
                 setProductList(data)
+                setPagination(pagination)
             } catch (error) {
                 console.log('Failed to fetch product list: ', error)
             }
 
             setLoading(false)
         })()
-    }, [])
+    }, [filters])
+
+    const handleOnChange = (e, page) => {
+        setFilters((preFilters) => ({
+            ...preFilters,
+            _page: page
+        }))
+    }
 
     return (
         <Box>
@@ -44,7 +69,15 @@ function ListPage(props) {
                     </Grid>
                     <Grid item className={classes.right}>
                         <Paper elevation={0}>
-                            {loading ? <ProductListSkeletons /> : <ProductList data={productList} />}
+                            {loading ? <ProductListSkeletons length={8} /> : <ProductList data={productList} />}
+                            <Box className={classes.pagination}>
+                                <Pagination
+                                    color="primary"
+                                    page={pagination.page}
+                                    count={Math.ceil(pagination.total / pagination.limit)}
+                                    onChange={handleOnChange}
+                                />
+                            </Box>
                         </Paper>
                     </Grid>
                 </Grid>
