@@ -1,9 +1,7 @@
 import Header from 'components/Header';
 import ProductFeature from 'features/Product';
 import TodoFeature from 'features/Todo';
-import { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import productApi from './api/productApi';
 import './App.scss';
 import Box from './components/Box';
 import Clock from './components/Clock';
@@ -11,19 +9,6 @@ import NotFound from './components/NotFound';
 import Counter from './features/Counter';
 
 function App() {
-  useEffect(() => {
-    (async () => {
-      try {
-        const params = {
-          _limit: 10,
-        };
-        const productList = await productApi.getAll(params);
-      } catch (error) {
-        console.error('Failed to fetch product list');
-      }
-    })();
-  }, []);
-
   return (
     <div className='app'>
       <div className='header'>
