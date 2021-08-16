@@ -17,7 +17,7 @@ function Product({ product }) {
         : THUMBNAIL_PLACEHOLDER
     return (
         <Box padding={1}>
-            <Box p={1}>
+            <Box p={1} minHeight="230px">
                 <img src={thumbnailUrl} alt={product.name} width="100%" />
             </Box>
             <Typography variant="body1"> {product.name}</Typography>
