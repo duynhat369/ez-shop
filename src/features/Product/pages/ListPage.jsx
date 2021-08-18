@@ -1,9 +1,12 @@
 import { Box, Container, Grid, makeStyles, Paper } from '@material-ui/core';
+import { Pagination } from '@material-ui/lab';
 import productApi from 'api/productApi';
 import React, { useEffect, useState } from 'react';
+import ProductFilters from '../components/ProductFilters';
+import ProductFiltersSkeletons from '../components/ProductFiltersSkeletons';
 import ProductList from '../components/ProductList';
 import ProductListSkeletons from '../components/ProductListSkeletons';
-import { Pagination } from '@material-ui/lab';
+import ProductSort from '../components/ProductSort';
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -35,6 +38,7 @@ function ListPage(props) {
     const [filters, setFilters] = useState({
         _page: 1,
         _limit: 8,
+        _sort: 'salePrice:ASC',
     })
 
     useEffect(() => {
@@ -54,7 +58,21 @@ function ListPage(props) {
     const handleOnChange = (e, page) => {
         setFilters((preFilters) => ({
             ...preFilters,
-            _page: page
+            _page: page,
+        }))
+    }
+
+    const handleSortChange = (newSortValue) => {
+        setFilters((preFilters) => ({
+            ...preFilters,
+            _sort: newSortValue,
+        }))
+    }
+
+    const handleFiltersChange = (newFilters) => {
+        setFilters((preFilters) => ({
+            ...preFilters,
+            ...newFilters,
         }))
     }
 
@@ -64,11 +82,21 @@ function ListPage(props) {
                 <Grid container spacing={1}>
                     <Grid item className={classes.left}>
                         <Paper elevation={0}>
-                            Side bar
+                            {loading
+                                ? <ProductFiltersSkeletons length={8} />
+                                : <ProductFilters
+                                    filters={filters}
+                                    onChange={handleFiltersChange}
+                                />
+                            }
                         </Paper>
                     </Grid>
                     <Grid item className={classes.right}>
                         <Paper elevation={0}>
+                            <ProductSort
+                                currentSort={filters._sort}
+                                onChange={handleSortChange}
+                            />
                             {loading ? <ProductListSkeletons length={8} /> : <ProductList data={productList} />}
                             <Box className={classes.pagination}>
                                 <Pagination
