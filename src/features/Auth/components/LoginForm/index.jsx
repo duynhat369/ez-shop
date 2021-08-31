@@ -78,7 +78,7 @@ function LoginForm(props) {
                 <LockOutlined />
             </Avatar>
             <Typography className={classes.title} component="h3" variant="h5">
-                Sing In
+                Sign In
             </Typography>
             <form
                 onSubmit={form.handleSubmit(handleSubmit)}
