@@ -42,7 +42,6 @@ function FilterByCategory(props) {
         (async () => {
             try {
                 const list = await categoryApi.getAll()
-                console.log({ list })
                 setCategoryList(list.map(x => ({
                     id: x.id,
                     name: x.name,
@@ -55,13 +54,17 @@ function FilterByCategory(props) {
 
     const handleCategoryClick = (category) => {
         if (onChange) {
-            onChange(category.id)
+            onChange(category)
         }
     }
 
     return (
-        <Box className={classes.root}>
-            <Typography variant="subtitle2" className={classes.typography}>DANH MỤC SẢN PHẨM</Typography>
+        <Box className={classes.root} minHeight="229px">
+            <Typography
+                variant="subtitle2"
+                className={classes.typography}>
+                DANH MỤC SẢN PHẨM
+            </Typography>
             <ul className={classes.menu}>
                 {categoryList.map(category => (
                     <li

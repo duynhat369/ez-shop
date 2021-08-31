@@ -1,12 +1,15 @@
 import { Box, Container, Grid, makeStyles, Paper } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 import productApi from 'api/productApi';
+import queryString from 'query-string';
 import React, { useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import FilterViewer from '../components/FilterViewer';
 import ProductFilters from '../components/ProductFilters';
-import ProductFiltersSkeletons from '../components/ProductFiltersSkeletons';
 import ProductList from '../components/ProductList';
-import ProductListSkeletons from '../components/ProductListSkeletons';
 import ProductSort from '../components/ProductSort';
+import ProductFiltersSkeletons from '../components/Skeletons/ProductFiltersSkeletons';
+import ProductListSkeletons from '../components/Skeletons/ProductListSkeletons';
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -28,6 +31,11 @@ const useStyles = makeStyles(theme => ({
 
 function ListPage(props) {
     const classes = useStyles()
+
+    const location = useLocation()
+    const history = useHistory()
+    const queryParams = queryString.parse(location.search)
+
     const [productList, setProductList] = useState([])
     const [loading, setLoading] = useState(true)
     const [pagination, setPagination] = useState({
@@ -35,11 +43,21 @@ function ListPage(props) {
         limit: 8,
         total: 8,
     })
-    const [filters, setFilters] = useState({
-        _page: 1,
-        _limit: 8,
-        _sort: 'salePrice:ASC',
-    })
+    //default query params url
+    const [filters, setFilters] = useState(() => ({
+        ...queryParams,
+        _page: Number.parseInt(queryParams._page) || 1,
+        _limit: Number.parseInt(queryParams._limit) || 8,
+        _sort: queryParams._sort || 'salePrice:ASC',
+    }))
+
+    //sync filters to url on change
+    useEffect(() => {
+        history.push({
+            pathname: history.location.pathname,
+            search: queryString.stringify(filters)
+        })
+    }, [history, filters])
 
     useEffect(() => {
         (async () => {
@@ -76,6 +94,10 @@ function ListPage(props) {
         }))
     }
 
+    const setNewFilters = (newFilters) => {
+        setFilters(newFilters)
+    }
+
     return (
         <Box>
             <Container>
@@ -84,20 +106,17 @@ function ListPage(props) {
                         <Paper elevation={0}>
                             {loading
                                 ? <ProductFiltersSkeletons length={8} />
-                                : <ProductFilters
-                                    filters={filters}
-                                    onChange={handleFiltersChange}
-                                />
+                                : <ProductFilters filters={filters} onChange={handleFiltersChange} />
                             }
                         </Paper>
                     </Grid>
                     <Grid item className={classes.right}>
                         <Paper elevation={0}>
-                            <ProductSort
-                                currentSort={filters._sort}
-                                onChange={handleSortChange}
-                            />
+                            <ProductSort currentSort={filters._sort} onChange={handleSortChange} />
+                            <FilterViewer filters={filters} onChange={setNewFilters} />
+
                             {loading ? <ProductListSkeletons length={8} /> : <ProductList data={productList} />}
+
                             <Box className={classes.pagination}>
                                 <Pagination
                                     color="primary"

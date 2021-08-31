@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tab, Tabs } from '@material-ui/core';
+import { makeStyles, Tab, Tabs } from '@material-ui/core';
 
 ProductSort.propTypes = {
     currentSort: PropTypes.string.isRequired,
@@ -11,8 +11,15 @@ ProductSort.defaultProps = {
     onChange: null,
 }
 
+const useStyles = makeStyles(theme => ({
+    root: {
+        padding: theme.spacing(1),
+    }
+}))
+
 function ProductSort(props) {
     const { currentSort, onChange } = props
+    const classes = useStyles()
 
     const handleSortChange = (e, newSortValue) => {
         if (onChange) {
@@ -22,14 +29,15 @@ function ProductSort(props) {
 
     return (
         <Tabs
+            className={classes.root}
             textColor="primary"
             indicatorColor="primary"
             aria-label="disabled tabs example"
             value={currentSort}
             onChange={handleSortChange}
         >
-            <Tab label="Giá thấp tới cao" value="salePrice:ASC" />
-            <Tab label="Giá cao xuống thấp" value="salePrice:DESC" />
+            <Tab label="Giá thấp" value="salePrice:ASC" />
+            <Tab label="Giá cao" value="salePrice:DESC" />
         </Tabs>
     );
 }
