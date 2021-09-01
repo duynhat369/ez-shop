@@ -87,7 +87,7 @@ export default function Header() {
                 <Toolbar>
                     <CropFreeIcon className={classes.menuButton} />
                     <Typography variant="h6" className={classes.title}>
-                        <Link to="/" className={classes.link}>ShopE</Link>
+                        <Link to="/" className={classes.link}>TyKy</Link>
                     </Typography>
 
                     <NavLink
