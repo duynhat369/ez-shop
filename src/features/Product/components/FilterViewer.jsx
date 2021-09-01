@@ -55,10 +55,9 @@ const FILTER_LIST = [
     },
     {
         id: 3,
-        getLabel: (filters) => `Từ ${filters.salePrice_gte} tới ${filters.salePrice_lte}`,
+        getLabel: (filters) => `Từ ${filters.salePrice_gte} tới ${filters.salePrice_lte}đ`,
         isActive: () => true,
-        isVisible: (filters) => ((Number.parseInt(filters.salePrice_gte) > 0) && (Number.parseInt(filters.salePrice_lte) > 0))
-            && (Object.keys(filters).includes('salePrice_gte') && Object.keys(filters).includes('salePrice_lte')),
+        isVisible: (filters) => ((Number.parseInt(filters.salePrice_lte) > 0)) && (Object.keys(filters).includes('salePrice_gte') && Object.keys(filters).includes('salePrice_lte')),
         isRemovable: true,
         onRemove: (filters) => {
             const newFilters = { ...filters }

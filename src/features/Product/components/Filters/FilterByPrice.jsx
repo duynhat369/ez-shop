@@ -56,7 +56,7 @@ function FilterByPrice(props) {
     }
 
     const handlePriceSubmit = () => {
-        if (onChange) onChange(values)
+        if (onChange && Number.parseInt(values.salePrice_lte) > 0) onChange(values)
         setValues({
             salePrice_gte: 0,
             salePrice_lte: 0,
