@@ -10,8 +10,9 @@ function Box() {
             <div
                 className="boxed"
                 style={{ backgroundColor: color }}
-            ></div>
-            <p style={{ color: color }}>123</p>
+            >
+                <p style={{ color: color }}>/box</p>
+            </div>
         </React.Fragment>
     );
 }

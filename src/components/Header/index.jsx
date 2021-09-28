@@ -99,7 +99,7 @@ export default function Header() {
                         <Button color="inherit">Products</Button>
                     </NavLink>
                     <NavLink
-                        to='/list/:id'
+                        to='/products/:productId'
                         className={classes.link}
                         activeClassName='active-menu'
                     >

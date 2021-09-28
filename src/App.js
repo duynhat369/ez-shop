@@ -3,10 +3,8 @@ import ProductFeature from 'features/Product';
 import TodoFeature from 'features/Todo';
 import { Route, Switch } from 'react-router-dom';
 import './App.scss';
-import Box from './components/Box';
 import Clock from './components/Clock';
 import NotFound from './components/NotFound';
-import Counter from './features/Counter';
 
 function App() {
   return (
@@ -17,9 +15,9 @@ function App() {
 
       <Switch>
         <Route path='/' component={Clock} exact />
-        <Route path='/clock' component={Clock} exact />
+        {/* <Route path='/clock' component={Clock} exact />
         <Route path='/counter' component={Counter} exact />
-        <Route path='/box' component={Box} exact />
+        <Route path='/box' component={Box} exact /> */}
         <Route path='/list' component={TodoFeature} />
         <Route path='/products' component={ProductFeature} />
 
