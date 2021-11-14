@@ -1,4 +1,4 @@
-import { Box, IconButton, MenuItem } from '@material-ui/core';
+import { Badge, Box, IconButton, MenuItem } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -7,14 +7,15 @@ import Menu from '@material-ui/core/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { AccountCircle, Close } from '@material-ui/icons';
+import { AccountCircle, Close, ShoppingCart } from '@material-ui/icons';
 import CropFreeIcon from '@material-ui/icons/CropFree';
 import Login from 'features/Auth/components/Login';
 import Register from 'features/Auth/components/Register';
 import { logout } from 'features/Auth/userSlice';
+import { cartItemsCountSelector } from 'features/Cart/selectors';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +31,14 @@ const useStyles = makeStyles((theme) => ({
     link: {
         color: '#fff',
         textDecoration: 'none',
+    },
+    cartBox: {
+        display: 'flex',
+        alignItems: 'flex-end',
+    },
+    cartTitle: {
+        marginLeft: theme.spacing(1),
+        fontSize: '0.75rem',
     },
     closeButton: {
         position: 'absolute',
@@ -51,14 +60,17 @@ const MODE = {
 
 export default function Header() {
     const dispatch = useDispatch();
-    const [anchorEl, setAnchorEl] = useState(null)
+    const history = useHistory()
     const loggedInUser = useSelector(state => state.user.current)
-    const isLoggedIn = !!loggedInUser.id
+    const cartItemsCount = useSelector(cartItemsCountSelector)
 
+    const isLoggedIn = !!loggedInUser.id
+    const [anchorEl, setAnchorEl] = useState(null)
     const [open, setOpen] = useState(false);
     const [mode, setMode] = useState(MODE.LOGIN);
 
     const classes = useStyles();
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -81,6 +93,10 @@ export default function Header() {
         setAnchorEl(null)
     }
 
+    const handleCartClick = () => {
+        history.push('/cart')
+    }
+
     return (
         <div className={classes.root}>
             <AppBar position="static">
@@ -98,13 +114,7 @@ export default function Header() {
                     >
                         <Button color="inherit">Products</Button>
                     </NavLink>
-                    <NavLink
-                        to='/products/:productId'
-                        className={classes.link}
-                        activeClassName='active-menu'
-                    >
-                        <Button color="inherit">Detail Page</Button>
-                    </NavLink>
+
                     {!isLoggedIn && (
                         <Button color="inherit" onClick={handleClickOpen} >
                             Login
@@ -115,6 +125,12 @@ export default function Header() {
                             <AccountCircle />
                         </IconButton>
                     )}
+                    <Button size="large" aria-label="show items count" color="inherit" className={classes.cartBox} onClick={handleCartClick}>
+                        <Badge badgeContent={cartItemsCount} color="error">
+                            <ShoppingCart />
+                        </Badge>
+                        <Typography variant="body2" component="span" className={classes.cartTitle}>Giỏ Hàng</Typography>
+                    </Button>
                 </Toolbar>
                 <Menu
                     keepMounted
@@ -132,7 +148,7 @@ export default function Header() {
                     getContentAnchorEl={null}
                 >
                     <MenuItem onClick={handleCloseMenu}>Profile</MenuItem>
-                    <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
+                    <MenuItem onClick={handleCloseMenu}>My cart</MenuItem>
                     <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
                 </Menu>
             </AppBar>

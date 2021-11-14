@@ -4,7 +4,7 @@ import productApi from 'api/productApi';
 import queryString from 'query-string';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import FilterViewer from '../components/FilterViewer';
+import FilterViewer from '../components/Filters/FilterViewer';
 import ProductFilters from '../components/ProductFilters';
 import ProductList from '../components/ProductList';
 import ProductSort from '../components/ProductSort';
@@ -45,8 +45,6 @@ function ListPage(props) {
             isFreeShip: params.isFreeShip === 'true',
         }
     }, [location.search])
-
-    console.log("quey params: ", queryParams)
 
     const [productList, setProductList] = useState([])
     const [loading, setLoading] = useState(true)

@@ -9,6 +9,7 @@
   - material-ui/core
   - material-ui/icons
   - axios
+  - dompurify
 
 - Link app: https://react-udemy-duynhat369.vercel.app/
 

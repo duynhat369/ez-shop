@@ -1,4 +1,5 @@
 import Header from 'components/Header';
+import CartFeature from 'features/Cart';
 import ProductFeature from 'features/Product';
 import TodoFeature from 'features/Todo';
 import { Route, Switch } from 'react-router-dom';
@@ -20,6 +21,7 @@ function App() {
         <Route path='/box' component={Box} exact /> */}
         <Route path='/list' component={TodoFeature} />
         <Route path='/products' component={ProductFeature} />
+        <Route path='/cart' component={CartFeature} />
 
         <Route component={NotFound} />
       </Switch>
