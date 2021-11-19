@@ -76,8 +76,10 @@ export default function Header() {
         setOpen(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const handleClose = (event, reason) => {
+        if (reason !== 'backdropClick') {
+            setOpen(false);
+        }
     };
 
     const handleMenuClick = (e) => {
@@ -155,7 +157,6 @@ export default function Header() {
 
             <Dialog
                 disableEscapeKeyDown
-                disableBackdropClick
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"

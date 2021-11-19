@@ -1,4 +1,5 @@
 import { Box, makeStyles, Typography } from '@material-ui/core';
+import { login } from 'features/Auth/userSlice';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { formatPrice } from 'utils';
@@ -10,6 +11,10 @@ const useStyles = makeStyles(theme => ({
     },
     user: {
         padding: '16px 8px',
+    },
+    username: {
+        marginRight: theme.spacing(1),
+        borderRight: '1px solid #bbb',
     },
     totalBox: {
         padding: '16px 8px',
@@ -28,13 +33,21 @@ const useStyles = makeStyles(theme => ({
 
 function CartTotal(props) {
     const cartTotal = useSelector(cartTotalSelector)
+    const userLogin = useSelector(state => state.user.current)
     const classes = useStyles()
     return (
         <Box className={classes.root}>
             <Box className={classes.user}>
                 <Typography variant="body1">Thông tin người nhận:</Typography>
-                <Typography variant="subtitle2" component="span">User name | </Typography>
-                <Typography variant="subtitle2" component="span">User email</Typography>
+                {userLogin.id &&
+                    <>
+                        <Typography variant="subtitle2" component="span" className={classes.username}>{userLogin.fullName} </Typography>
+                        <Typography variant="subtitle2" component="span">{userLogin.email} </Typography>
+                    </>
+                }
+                {!userLogin.id &&
+                    <Typography>Chưa đăng nhập</Typography>
+                }
             </Box>
 
             <Box className={classes.totalBox}>

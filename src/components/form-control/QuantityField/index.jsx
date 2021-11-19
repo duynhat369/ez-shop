@@ -1,4 +1,4 @@
-import { Box, FormControl, IconButton, makeStyles, OutlinedInput, Typography } from '@material-ui/core';
+import { Box, FormControl, IconButton, makeStyles, OutlinedInput } from '@material-ui/core';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { Add, Remove } from '@material-ui/icons';
 import PropTypes from 'prop-types';
@@ -14,9 +14,6 @@ QuantityField.propTypes = {
 };
 
 const useStyles = makeStyles(theme => ({
-    // title: {
-    //     marginBottom: theme.spacing(2),
-    // },
     quantityForm: {
         display: 'flex',
         flexFlow: 'row nowrap',

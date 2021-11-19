@@ -1,6 +1,7 @@
 import { Box, Container, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import BuyNowButton from '../components/BuyNowButton';
 import CartList from '../components/CartList';
 import CartTotal from '../components/CartTotal';
 
@@ -74,6 +75,7 @@ function ListPage(props) {
                                 <Paper elevation={0}>
                                     <CartTotal />
                                 </Paper>
+                                <BuyNowButton />
                             </Grid>
                         </Grid>
                     </Container>
