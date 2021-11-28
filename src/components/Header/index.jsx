@@ -28,9 +28,16 @@ const useStyles = makeStyles((theme) => ({
     title: {
         flexGrow: 1,
     },
+    brand: {
+        color: theme.palette.warning.light,
+        textDecoration: 'none',
+    },
     link: {
         color: '#fff',
         textDecoration: 'none',
+        '& active-menu': {
+            color: theme.palette.warning.light,
+        },
     },
     cartBox: {
         display: 'flex',
@@ -105,13 +112,16 @@ export default function Header() {
                 <Toolbar>
                     <CropFreeIcon className={classes.menuButton} />
                     <Typography variant="h6" className={classes.title}>
-                        <Link to="/" className={classes.link}>TyKy</Link>
+                        <Link to="/" className={classes.brand}>TyKy</Link>
                     </Typography>
 
                     <NavLink
                         to='/products'
                         className={classes.link}
                         activeClassName='active-menu'
+                        activeStyle={{
+                            color: "#ff9800"
+                        }}
                         exact
                     >
                         <Button color="inherit">Products</Button>

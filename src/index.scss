@@ -147,3 +147,25 @@ html {
 .container {
   margin: 0 5rem;
 }
+
+.loading {
+  display: inline-flex;
+  & span {
+    word-break: break-all;
+    height: 1.2em;
+    line-height: 1.2;
+    width: 0%;
+    overflow: hidden;
+    animation: typeEffect 2s linear infinite alternate;
+    &:before {
+      content: ' ';
+      display: inline-block;
+    }
+  }
+}
+@keyframes typeEffect {
+  90%,
+  100% {
+    width: 100%;
+  }
+}
