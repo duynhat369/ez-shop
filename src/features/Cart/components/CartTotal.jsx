@@ -1,4 +1,4 @@
-import { Box, makeStyles, Typography } from '@material-ui/core';
+import { Box, List, ListItem, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { formatPrice } from 'utils';
@@ -21,7 +21,6 @@ const useStyles = makeStyles(theme => ({
 
         },
         '& > ul > li': {
-            display: 'flex',
             justifyContent: 'space-between',
         },
     },
@@ -50,20 +49,20 @@ function CartTotal(props) {
             </Box>
 
             <Box className={classes.totalBox}>
-                <ul>
-                    <li className={classes.li}>
-                        <Typography variant="body1" component="span">Tạm tính </Typography> {formatPrice(cartTotal)}
-                    </li>
-                    <li>
+                <List>
+                    <ListItem className={classes.li}>
+                        <Typography variant="body1" component="span">Tạm tính: </Typography> {formatPrice(cartTotal)}
+                    </ListItem>
+                    <ListItem>
                         <Typography variant="body1" component="span">Giảm giá: </Typography> 0
-                    </li>
-                </ul>
-                <ul>
-                    <li>
+                    </ListItem>
+                </List>
+                <List>
+                    <ListItem>
                         <Typography variant="body1" component="span">Tổng cộng </Typography>
                         <Typography variant="h5" className={classes.total}> {formatPrice(cartTotal)} </Typography>
-                    </li>
-                </ul>
+                    </ListItem>
+                </List>
             </Box>
         </Box>
     );

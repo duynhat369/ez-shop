@@ -1,4 +1,4 @@
-import { Box, Checkbox, FormControlLabel, makeStyles, Typography } from '@material-ui/core';
+import { Box, Checkbox, FormControlLabel, List, ListItem, makeStyles, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -23,6 +23,7 @@ const useStyles = makeStyles(theme => ({
     },
 
     list: {
+        padding: '0',
         '& span': {
             fontSize: '14px',
         }
@@ -44,12 +45,12 @@ function FilterByService(props) {
         <Box className={classes.root}>
             <Typography variant="subtitle2" className={classes.typography}>DỊCH VỤ</Typography>
 
-            <ul>
+            <List>
                 {[
                     { value: 'isPromotion', label: 'Có khuyến mãi' },
                     { value: 'isFreeShip', label: 'Vận chuyển miễn phí' }
                 ].map(service => (
-                    <li key={service.value} className={classes.list}>
+                    <ListItem key={service.value} className={classes.list}>
                         <FormControlLabel
                             control={
                                 <Checkbox
@@ -61,9 +62,9 @@ function FilterByService(props) {
                             }
                             label={service.label}
                         />
-                    </li>
+                    </ListItem>
                 ))}
-            </ul>
+            </List>
         </Box>
     );
 }

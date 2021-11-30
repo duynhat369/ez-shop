@@ -1,4 +1,4 @@
-import { Box, makeStyles, Typography } from '@material-ui/core';
+import { Box, List, ListItem, makeStyles, Typography } from '@material-ui/core';
 import categoryApi from 'api/categoryApi';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
@@ -6,10 +6,6 @@ import React, { useEffect, useState } from 'react';
 FilterByCategory.propTypes = {
     onChange: PropTypes.func,
 };
-
-FilterByCategory.defaultProps = {
-    onChange: null,
-}
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -22,7 +18,8 @@ const useStyles = makeStyles(theme => ({
 
     menu: {
         '& > li': {
-            marginTop: theme.spacing(1),
+            paddingLeft: '0',
+            paddingRight: '0',
             transition: 'all .25s',
 
             '&:hover': {
@@ -34,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function FilterByCategory(props) {
-    const { onChange } = props
+    const { onChange = null } = props
     const classes = useStyles()
     const [categoryList, setCategoryList] = useState([])
 
@@ -65,16 +62,16 @@ function FilterByCategory(props) {
                 className={classes.typography}>
                 DANH MỤC SẢN PHẨM
             </Typography>
-            <ul className={classes.menu}>
+            <List className={classes.menu}>
                 {categoryList.map(category => (
-                    <li
+                    <ListItem
                         key={category.id}
                         onClick={() => handleCategoryClick(category)}
                     >
                         <Typography variant="body2">{category.name}</Typography>
-                    </li>
+                    </ListItem>
                 ))}
-            </ul>
+            </List>
         </Box>
     );
 }

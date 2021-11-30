@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { List, ListItem } from '@material-ui/core';
 
 TodoList.propTypes = {
     todoList: PropTypes.array,
@@ -12,15 +13,15 @@ TodoList.defaultProps = {
 function TodoList(props) {
     const { todoList } = props
     return (
-        <ul>
+        <List>
             {todoList.map(todo => (
-                <li
+                <ListItem
                     key={todo.id}
                 >
                     {todo.name}
-                </li>
+                </ListItem>
             ))}
-        </ul>
+        </List>
     );
 }
 

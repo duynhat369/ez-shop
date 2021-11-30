@@ -1,4 +1,4 @@
-import { Box } from '@material-ui/core';
+import { Box, List, ListItem } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -7,17 +7,15 @@ ProductFiltersCategoriesSkeletons.propTypes = {
     length: PropTypes.number,
 };
 
-ProductFiltersCategoriesSkeletons.defaultProps = {
-    length: 8,
-}
+function ProductFiltersCategoriesSkeletons(props) {
+    const { length = 6 } = props
 
-function ProductFiltersCategoriesSkeletons({ length }) {
     return (
         <Box p={2}>
             {/* Filter by categories */}
             <Skeleton width="80%" height={25} style={{ marginBottom: 16 }} />
             {Array.from(new Array(length)).map((x, index) => (
-                <ul
+                <List
                     style={{ marginBottom: 8 }}
                     key={index}
                     xs={12}
@@ -25,10 +23,10 @@ function ProductFiltersCategoriesSkeletons({ length }) {
                     md={12}
                     lg={12}
                 >
-                    <li style={{ marginTop: 8 }} >
+                    <ListItem style={{ marginTop: 0, padding: 0 }} >
                         <Skeleton width="30%" />
-                    </li>
-                </ul>
+                    </ListItem>
+                </List>
             ))}
 
             {/* Filter by price */}
