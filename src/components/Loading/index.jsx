@@ -13,11 +13,13 @@ Loading.defaultProps = {
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
-        flexFlow: 'column nowrap',
         width: '100%',
         height: '100vh',
+
+        flexFlow: 'column nowrap',
         alignItems: 'center',
         justifyContent: 'center',
+
         '& span': {
             fontSize: '3rem',
             fontWeight: '600',

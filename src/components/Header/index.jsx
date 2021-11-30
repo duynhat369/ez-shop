@@ -7,8 +7,7 @@ import Menu from '@material-ui/core/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { AccountCircle, Close, ShoppingCart } from '@material-ui/icons';
-import CropFreeIcon from '@material-ui/icons/CropFree';
+import { AccountCircle, Close, ShoppingBasket, ShoppingCart } from '@material-ui/icons';
 import Login from 'features/Auth/components/Login';
 import Register from 'features/Auth/components/Register';
 import { logout } from 'features/Auth/userSlice';
@@ -22,14 +21,17 @@ const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
-    menuButton: {
-        marginRight: theme.spacing(2),
+    logoButton: {
+        marginRight: theme.spacing(1),
+        color: theme.palette.warning.light,
     },
     title: {
         flexGrow: 1,
     },
     brand: {
+        display: 'flex',
         color: theme.palette.warning.light,
+        alignItems: 'end',
         textDecoration: 'none',
     },
     link: {
@@ -110,18 +112,17 @@ export default function Header() {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                    <CropFreeIcon className={classes.menuButton} />
                     <Typography variant="h6" className={classes.title}>
-                        <Link to="/" className={classes.brand}>TyKy</Link>
+                        <Link to="/" className={classes.brand}>
+                            <ShoppingBasket className={classes.logoButton} fontSize="large" />
+                            TyKy
+                        </Link>
                     </Typography>
 
                     <NavLink
                         to='/products'
                         className={classes.link}
                         activeClassName='active-menu'
-                        activeStyle={{
-                            color: "#ff9800"
-                        }}
                         exact
                     >
                         <Button color="inherit">Products</Button>
@@ -198,6 +199,6 @@ export default function Header() {
                     }
                 </DialogContent>
             </Dialog>
-        </div>
+        </div >
     );
 }

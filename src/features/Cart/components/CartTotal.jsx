@@ -1,5 +1,4 @@
 import { Box, makeStyles, Typography } from '@material-ui/core';
-import { login } from 'features/Auth/userSlice';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { formatPrice } from 'utils';
